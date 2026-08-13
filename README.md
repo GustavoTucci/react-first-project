@@ -44,21 +44,6 @@ Antes de iniciar, verifique se você possui:
 - Node.js instalado
 - npm instalado
 
-## Instalação
-
-1. Clone o repositório:
-
-```bash
-git clone <url-do-repositorio>
-cd primeiro-projeto
-```
-
-2. Instale as dependências:
-
-```bash
-npm install
-```
-
 ## Executando a Aplicação
 
 Para iniciar o projeto em modo de desenvolvimento:
