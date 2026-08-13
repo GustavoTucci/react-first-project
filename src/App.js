@@ -1,14 +1,6 @@
 import { useMemo, useState } from 'react';
 import './App.css';
 
-const initialExpenses = [
-  { id: 1, description: 'Salário', category: 'Receita', type: 'income', value: 3500, date: '2026-08-01' },
-  { id: 2, description: 'Mercado', category: 'Casa', type: 'expense', value: 420, date: '2026-08-03' },
-  { id: 3, description: 'Transporte', category: 'Transporte', type: 'expense', value: 180, date: '2026-08-04' },
-  { id: 4, description: 'Freelance', category: 'Receita', type: 'income', value: 800, date: '2026-08-06' },
-  { id: 5, description: 'Cinema', category: 'Lazer', type: 'expense', value: 90, date: '2026-08-08' },
-];
-
 const categoryOptions = ['Casa', 'Alimentação', 'Transporte', 'Saúde', 'Lazer', 'Educação', 'Receita', 'Outros'];
 
 const currencyFormatter = new Intl.NumberFormat('pt-BR', {
@@ -17,7 +9,7 @@ const currencyFormatter = new Intl.NumberFormat('pt-BR', {
 });
 
 function App() {
-  const [expenses, setExpenses] = useState(initialExpenses);
+  const [expenses, setExpenses] = useState([]);
   const [formData, setFormData] = useState({
     description: '',
     category: 'Casa',
