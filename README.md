@@ -1,70 +1,137 @@
-# Getting Started with Create React App
+# Gerenciador de Gastos
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplicação web para controle financeiro pessoal, desenvolvida em React para registrar receitas, despesas, monitorar saldo e acompanhar movimentações por categoria.
 
-## Available Scripts
+<div align="center">
 
-In the project directory, you can run:
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![CSS](https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
-### `npm start`
+</div>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Descrição
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Este projeto foi criado como uma aplicação prática para aprender e aplicar conceitos fundamentais de desenvolvimento frontend, como:
 
-### `npm test`
+- gerenciamento de estado em React
+- manipulação de formulários
+- cálculos financeiros em tempo real
+- estrutura de componentes
+- estilização com CSS
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Funcionalidades
 
-### `npm run build`
+- cadastro de receitas e despesas
+- cálculo automático de saldo
+- resumo de entradas e saídas
+- agrupamento por categoria
+- histórico de movimentações com data
+- remoção de itens do histórico
+- layout responsivo para desktop e mobile
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Tecnologias Utilizadas
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- React
+- JavaScript
+- CSS
+- Create React App
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Requisitos
 
-### `npm run eject`
+Antes de iniciar, verifique se você possui:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Node.js instalado
+- npm instalado
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Instalação
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Clone o repositório:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+git clone <url-do-repositorio>
+cd primeiro-projeto
+```
 
-## Learn More
+2. Instale as dependências:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm install
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Executando a Aplicação
 
-### Code Splitting
+Para iniciar o projeto em modo de desenvolvimento:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+npm start
+```
 
-### Analyzing the Bundle Size
+A aplicação será aberta em:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```text
+http://localhost:3001
+```
 
-### Making a Progressive Web App
+> A porta 3001 foi escolhida para evitar conflitos com outras aplicações que já usam a porta 3000.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Estrutura do Projeto
 
-### Advanced Configuration
+```text
+primeiro-projeto/
+├── public/
+├── src/
+│   ├── App.js
+│   ├── App.css
+│   ├── index.js
+│   └── index.css
+├── package.json
+├── README.md
+├── .gitignore
+├── package-lock.json
+└── node_modules/
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Scripts Disponíveis
 
-### Deployment
+```bash
+npm start
+```
+Inicia a aplicação em modo de desenvolvimento.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```bash
+npm run build
+```
+Cria a versão de produção para deploy.
 
-### `npm run build` fails to minify
+```bash
+npm test
+```
+Executa os testes do projeto.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Como Usar
+
+1. Preencha a descrição da movimentação.
+2. Escolha a categoria correspondente.
+3. Selecione o tipo da operação: receita ou despesa.
+4. Informe o valor e a data.
+5. Clique em salvar.
+6. A interface atualiza automaticamente os totais e o histórico.
+
+## Melhorias Planejadas
+
+- integração com backend em Node.js
+- persistência em banco de dados
+- autenticação de usuário
+- gráficos de despesas por período
+- filtros por mês e categoria
+- exportação dos dados em CSV
+
+## Status do Projeto
+
+Em desenvolvimento inicial, com foco em funcionalidades essenciais para gestão financeira pessoal.
+
+## Autor
+
+Projeto desenvolvido como estudo prático de React e fundamentos de aplicações web.
+
