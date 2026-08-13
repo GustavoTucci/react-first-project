@@ -1,20 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
 * {
   box-sizing: border-box;
 }
 
 html {
-  background: #0f172a;
+  background: #f8fafc;
 }
 
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #0f172a;
-  color: #e2e8f0;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  background: #f8fafc;
+  color: #0f172a;
 }
 
 button,
 input,
 select {
   font: inherit;
+}
+
+h1,
+h2,
+h3,
+p,
+strong,
+span,
+small,
+label,
+button,
+input,
+select {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
 }

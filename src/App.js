@@ -11,6 +11,11 @@ const initialExpenses = [
 
 const categoryOptions = ['Casa', 'Alimentação', 'Transporte', 'Saúde', 'Lazer', 'Educação', 'Receita', 'Outros'];
 
+const currencyFormatter = new Intl.NumberFormat('pt-BR', {
+  style: 'currency',
+  currency: 'BRL',
+});
+
 function App() {
   const [expenses, setExpenses] = useState(initialExpenses);
   const [formData, setFormData] = useState({
@@ -47,6 +52,16 @@ function App() {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
+
+    if (name === 'type') {
+      setFormData((prev) => ({
+        ...prev,
+        type: value,
+        category: value === 'income' ? 'Receita' : prev.category === 'Receita' ? 'Casa' : prev.category,
+      }));
+      return;
+    }
+
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -83,31 +98,53 @@ function App() {
   return (
     <div className="app-shell">
       <header className="topbar">
-        <div>
-          <p className="eyebrow">Controle financeiro</p>
-          <h1>Gerenciador de gastos</h1>
+        <div className="brand-block">
+          <div className="brand-mark">F</div>
+          <div>
+            <p className="eyebrow">Controle financeiro</p>
+            <h1>FlowBudget</h1>
+          </div>
+        </div>
+
+        <div className="topbar-actions">
+          <span className="soft-pill">Agosto 2026</span>
+          <button type="button" className="ghost-button">Resumo</button>
         </div>
       </header>
 
       <main className="dashboard">
         <section className="summary-grid">
-          <div className="summary-card income">
-            <span>Receitas</span>
-            <strong>R$ {totalIncome.toFixed(2).replace('.', ',')}</strong>
-          </div>
-          <div className="summary-card expense">
-            <span>Despesas</span>
-            <strong>R$ {totalExpense.toFixed(2).replace('.', ',')}</strong>
-          </div>
-          <div className="summary-card balance">
-            <span>Saldo</span>
-            <strong>R$ {balance.toFixed(2).replace('.', ',')}</strong>
-          </div>
+          <article className="summary-card income">
+            <div className="summary-header">
+              <span>Receitas</span>
+              <span className="summary-badge income-badge">+ </span>
+            </div>
+            <strong>{currencyFormatter.format(totalIncome)}</strong>
+          </article>
+
+          <article className="summary-card expense">
+            <div className="summary-header">
+              <span>Despesas</span>
+              <span className="summary-badge expense-badge">− </span>
+            </div>
+            <strong>{currencyFormatter.format(totalExpense)}</strong>
+          </article>
+
+          <article className="summary-card balance">
+            <div className="summary-header">
+              <span>Saldo</span>
+              <span className="summary-badge balance-badge">= </span>
+            </div>
+            <strong>{currencyFormatter.format(balance)}</strong>
+          </article>
         </section>
 
         <section className="content-grid">
           <form className="form-card" onSubmit={handleSubmit}>
-            <h2>Adicionar movimentação</h2>
+            <div className="section-heading">
+              <h2>Adicionar movimentação</h2>
+              <span className="section-tag">Nova</span>
+            </div>
 
             <label>
               Descrição
@@ -161,19 +198,26 @@ function App() {
               </label>
             </div>
 
-            <button type="submit">Salvar</button>
+            <button type="submit">Salvar transação</button>
           </form>
 
           <aside className="panel-card">
-            <h2>Gastos por categoria</h2>
+            <div className="section-heading">
+              <h2>Gastos por categoria</h2>
+              <span className="section-tag muted">Resumo</span>
+            </div>
+
             {categoryTotals.length === 0 ? (
               <p className="empty-text">Nenhuma despesa cadastrada.</p>
             ) : (
               <ul className="category-list">
                 {categoryTotals.map(([category, value]) => (
                   <li key={category}>
-                    <span>{category}</span>
-                    <strong>R$ {value.toFixed(2).replace('.', ',')}</strong>
+                    <div className="category-label">
+                      <span className="dot" aria-hidden="true" />
+                      <span>{category}</span>
+                    </div>
+                    <strong>{currencyFormatter.format(value)}</strong>
                   </li>
                 ))}
               </ul>
@@ -182,23 +226,32 @@ function App() {
         </section>
 
         <section className="expenses-card">
-          <h2>Histórico</h2>
+          <div className="section-heading">
+            <h2>Histórico</h2>
+            <span className="section-tag muted">{expenses.length} itens</span>
+          </div>
+
           {expenses.length === 0 ? (
             <p className="empty-text">Nenhuma movimentação cadastrada.</p>
           ) : (
             <div className="expense-list">
               {expenses.map((item) => (
                 <div key={item.id} className="expense-item">
-                  <div>
-                    <p className="expense-name">{item.description}</p>
-                    <small>
-                      {item.category} • {new Date(item.date + 'T00:00:00').toLocaleDateString('pt-BR')}
-                    </small>
+                  <div className="expense-main">
+                    <div className={`money-icon ${item.type === 'income' ? 'income' : 'expense'}`}>
+                      {item.type === 'income' ? '+' : '-'}
+                    </div>
+                    <div>
+                      <p className="expense-name">{item.description}</p>
+                      <small>
+                        {item.category} • {new Date(item.date + 'T00:00:00').toLocaleDateString('pt-BR')}
+                      </small>
+                    </div>
                   </div>
 
                   <div className="expense-meta">
                     <span className={item.type === 'income' ? 'amount income-text' : 'amount expense-text'}>
-                      {item.type === 'income' ? '+' : '-'} R$ {item.value.toFixed(2).replace('.', ',')}
+                      {item.type === 'income' ? '+' : '-'} {currencyFormatter.format(item.value)}
                     </span>
                     <button type="button" className="delete-btn" onClick={() => handleDelete(item.id)}>
                       Excluir
