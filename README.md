@@ -28,6 +28,7 @@ Este projeto foi criado como uma aplicação prática para aprender e aplicar co
 - agrupamento por categoria
 - histórico de movimentações com data
 - remoção de itens do histórico
+- filtros por mês, categoria e tipo
 - layout responsivo para desktop e mobile
 
 ## Tecnologias Utilizadas

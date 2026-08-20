@@ -17,15 +17,32 @@ function App() {
     type: 'expense',
     date: new Date().toISOString().slice(0, 10),
   });
+  const [filters, setFilters] = useState({
+    month: '',
+    category: '',
+    type: '',
+  });
+
+  const filteredExpenses = useMemo(
+    () =>
+      expenses.filter((item) => {
+        const matchesMonth = !filters.month || item.date.startsWith(filters.month);
+        const matchesCategory = !filters.category || item.category === filters.category;
+        const matchesType = !filters.type || item.type === filters.type;
+
+        return matchesMonth && matchesCategory && matchesType;
+      }),
+    [expenses, filters]
+  );
 
   const totalIncome = useMemo(
-    () => expenses.filter((item) => item.type === 'income').reduce((sum, item) => sum + item.value, 0),
-    [expenses]
+    () => filteredExpenses.filter((item) => item.type === 'income').reduce((sum, item) => sum + item.value, 0),
+    [filteredExpenses]
   );
 
   const totalExpense = useMemo(
-    () => expenses.filter((item) => item.type === 'expense').reduce((sum, item) => sum + item.value, 0),
-    [expenses]
+    () => filteredExpenses.filter((item) => item.type === 'expense').reduce((sum, item) => sum + item.value, 0),
+    [filteredExpenses]
   );
 
   const balance = totalIncome - totalExpense;
@@ -33,14 +50,14 @@ function App() {
   const categoryTotals = useMemo(() => {
     const totals = {};
 
-    expenses
+    filteredExpenses
       .filter((item) => item.type === 'expense')
       .forEach((item) => {
         totals[item.category] = (totals[item.category] || 0) + item.value;
       });
 
     return Object.entries(totals).sort((a, b) => b[1] - a[1]);
-  }, [expenses]);
+  }, [filteredExpenses]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -85,6 +102,15 @@ function App() {
 
   const handleDelete = (id) => {
     setExpenses((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  const handleFilterChange = (event) => {
+    const { name, value } = event.target;
+    setFilters((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const clearFilters = () => {
+    setFilters({ month: '', category: '', type: '' });
   };
 
   return (
@@ -220,14 +246,48 @@ function App() {
         <section className="expenses-card">
           <div className="section-heading">
             <h2>Histórico</h2>
-            <span className="section-tag muted">{expenses.length} itens</span>
+            <span className="section-tag muted">{filteredExpenses.length} itens</span>
+          </div>
+
+          <div className="filters-bar">
+            <label>
+              Mês
+              <input type="month" name="month" value={filters.month} onChange={handleFilterChange} />
+            </label>
+
+            <label>
+              Categoria
+              <select name="category" value={filters.category} onChange={handleFilterChange}>
+                <option value="">Todas</option>
+                {categoryOptions.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              Tipo
+              <select name="type" value={filters.type} onChange={handleFilterChange}>
+                <option value="">Todos</option>
+                <option value="expense">Despesas</option>
+                <option value="income">Receitas</option>
+              </select>
+            </label>
+
+            <button type="button" className="clear-filters-btn" onClick={clearFilters}>
+              Limpar filtros
+            </button>
           </div>
 
           {expenses.length === 0 ? (
             <p className="empty-text">Nenhuma movimentação cadastrada.</p>
+          ) : filteredExpenses.length === 0 ? (
+            <p className="empty-text">Nenhuma movimentação encontrada com esses filtros.</p>
           ) : (
             <div className="expense-list">
-              {expenses.map((item) => (
+              {filteredExpenses.map((item) => (
                 <div key={item.id} className="expense-item">
                   <div className="expense-main">
                     <div className={`money-icon ${item.type === 'income' ? 'income' : 'expense'}`}>
