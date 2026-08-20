@@ -59,6 +59,8 @@ function App() {
     return Object.entries(totals).sort((a, b) => b[1] - a[1]);
   }, [filteredExpenses]);
 
+  const highestCategoryTotal = categoryTotals[0]?.[1] || 0;
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
 
@@ -228,14 +230,27 @@ function App() {
             {categoryTotals.length === 0 ? (
               <p className="empty-text">Nenhuma despesa cadastrada.</p>
             ) : (
-              <ul className="category-list">
+              <ul className="category-chart">
                 {categoryTotals.map(([category, value]) => (
                   <li key={category}>
-                    <div className="category-label">
-                      <span className="dot" aria-hidden="true" />
-                      <span>{category}</span>
+                    <div className="category-chart-header">
+                      <div className="category-label">
+                        <span className="dot" aria-hidden="true" />
+                        <span>{category}</span>
+                      </div>
+                      <strong>{currencyFormatter.format(value)}</strong>
                     </div>
-                    <strong>{currencyFormatter.format(value)}</strong>
+                    <div
+                      className="category-bar-track"
+                      role="img"
+                      aria-label={`${category}: ${currencyFormatter.format(value)}`}
+                    >
+                      <span
+                        className="category-bar"
+                        style={{ width: `${(value / highestCategoryTotal) * 100}%` }}
+                      />
+                    </div>
+                    <small>{Math.round((value / totalExpense) * 100)}% das despesas</small>
                   </li>
                 ))}
               </ul>
