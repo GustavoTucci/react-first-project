@@ -8,8 +8,18 @@ const currencyFormatter = new Intl.NumberFormat('pt-BR', {
   currency: 'BRL',
 });
 
+const initialExpenses = [
+  { id: 1, description: 'Salário', category: 'Receita', type: 'income', value: 5200, date: '2026-08-05' },
+  { id: 2, description: 'Aluguel', category: 'Casa', type: 'expense', value: 1450, date: '2026-08-06' },
+  { id: 3, description: 'Supermercado', category: 'Alimentação', type: 'expense', value: 680.5, date: '2026-08-08' },
+  { id: 4, description: 'Combustível', category: 'Transporte', type: 'expense', value: 320, date: '2026-08-10' },
+  { id: 5, description: 'Freelance de design', category: 'Receita', type: 'income', value: 950, date: '2026-08-12' },
+  { id: 6, description: 'Cinema e jantar', category: 'Lazer', type: 'expense', value: 185.9, date: '2026-08-15' },
+  { id: 7, description: 'Consulta médica', category: 'Saúde', type: 'expense', value: 240, date: '2026-08-18' },
+];
+
 function App() {
-  const [expenses, setExpenses] = useState([]);
+  const [expenses, setExpenses] = useState(initialExpenses);
   const [formData, setFormData] = useState({
     description: '',
     category: 'Casa',
