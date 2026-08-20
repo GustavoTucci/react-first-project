@@ -1,6 +1,6 @@
 # Gerenciador de Gastos
 
-Aplicação web para controle financeiro pessoal, desenvolvida em React para registrar receitas, despesas, monitorar saldo e acompanhar movimentações por categoria.
+Aplicação web responsiva para controle financeiro pessoal, desenvolvida em React. Permite registrar receitas e despesas, acompanhar o saldo e analisar os gastos por categoria.
 
 <div align="center">
 
@@ -17,6 +17,8 @@ Este projeto foi criado como uma aplicação prática para aprender e aplicar co
 - gerenciamento de estado em React
 - manipulação de formulários
 - cálculos financeiros em tempo real
+- filtros combinados por mês, categoria e tipo
+- visualização gráfica dos gastos
 - estrutura de componentes
 - estilização com CSS
 
@@ -30,7 +32,10 @@ Este projeto foi criado como uma aplicação prática para aprender e aplicar co
 - histórico de movimentações com data
 - remoção de itens do histórico
 - filtros por mês, categoria e tipo
+- botão para limpar todos os filtros
 - layout responsivo para desktop e mobile
+
+Ao iniciar, a aplicação carrega transações de demonstração para que o dashboard, o histórico e o gráfico possam ser explorados imediatamente. Novas movimentações são adicionadas ao histórico durante a sessão.
 
 ## Tecnologias Utilizadas
 
@@ -103,7 +108,9 @@ Executa os testes do projeto.
 3. Selecione o tipo da operação: receita ou despesa.
 4. Informe o valor e a data.
 5. Clique em salvar.
-6. A interface atualiza automaticamente os totais e o histórico.
+6. A interface atualiza automaticamente os totais, o gráfico e o histórico.
+7. Use os filtros no histórico para selecionar um mês, uma categoria ou o tipo de movimentação.
+8. Clique em “Limpar filtros” para voltar a visualizar todos os registros.
 
 ## Melhorias Planejadas
 
@@ -111,12 +118,14 @@ Executa os testes do projeto.
 - persistência em banco de dados
 - autenticação de usuário
 - gráficos de despesas por período
-- filtros por mês e categoria
 - exportação dos dados em CSV
+- edição de movimentações existentes
+- despesas recorrentes e parceladas
+- metas de economia e limites por categoria
 
 ## Status do Projeto
 
-Em desenvolvimento inicial, com foco em funcionalidades essenciais para gestão financeira pessoal.
+Em desenvolvimento, com as funcionalidades essenciais de registro, análise e filtragem de movimentações já disponíveis.
 
 ## Autor
 
